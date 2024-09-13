@@ -30,7 +30,7 @@ const Layout = () => {
 const NotFound = ()=>{
     return <div className={`w-1/2 mx-auto pt-4`}>
         <p className={`text-[color:var(--color-dark)]`}>Page not found</p>
-        <Link to={'/'} className={`text-[color:var(--color-main)] underline italic`}>Back to home</Link>
+        <Link to={'/messages'} className={`text-[color:var(--color-main)] underline italic`}>Back to home</Link>
     </div>
 }
 
