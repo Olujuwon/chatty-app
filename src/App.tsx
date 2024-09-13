@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React from "react";
 
 import {Link,Outlet, Route, Routes} from 'react-router-dom';
 
@@ -11,32 +11,21 @@ import ContactsPage from "./pages/ContactsPage.tsx";
 import Header from "./components/Header.tsx";
 import {Contact, NewContact} from "./components/Contact.tsx";
 import MessagesPage from "./pages/MessagesPage.tsx";
+import useCurrentTheme from "./hooks/useCurrentTheme.tsx";
 
 
 const Layout = () => {
-    const getCurrentTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
-    const [checked, setChecked] =
-        useState<string>(getCurrentTheme());
-
+    const {currentTheme, setCurrentTheme} = useCurrentTheme();
     const handleSwitchChange = (value: boolean)=>{
-        setChecked(()=>value ? 'dark' : 'light');
+        setCurrentTheme(()=>value ? 'dark' : 'light');
     }
 
-    const mqListener = ( (event) => {
-        setChecked(event.matches?'dark':'light');
-    });
-
-    useEffect(() => {
-        const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-        darkThemeMq.addEventListener('change',mqListener);
-        return () => darkThemeMq.removeEventListener('change',mqListener);
-    }, []);
-
-    return <div className={`${checked} w-full max-w-[480px] mx-auto h-lvh relative bg-[color:var(--color-bg)] font-poppins`}>
-        <Header checked={checked} handleSwitch={handleSwitchChange}/>
+    return <div className={`${currentTheme} w-full max-w-[480px] mx-auto h-lvh relative bg-[color:var(--color-bg)] font-poppins`}>
+        <Header checked={currentTheme} handleSwitch={handleSwitchChange}/>
         <Outlet/>
     </div>
 }
+
 
 const NotFound = ()=>{
     return <div className={`w-1/2 mx-auto pt-4`}>
