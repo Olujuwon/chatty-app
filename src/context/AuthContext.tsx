@@ -6,6 +6,7 @@ import {useRegisterUserMutation, useLoginInUserMutation} from "../redux/chatty.t
 
 import {IconLogout, IconUserCircle} from "@tabler/icons-react";
 import {IUser} from "../types";
+import {SmallBodyText} from "../components/Typography.tsx";
 
 
 interface AuthContextType {
@@ -90,7 +91,7 @@ export const AuthStatus = ()=>{
 
     return (
         <div className={`flex gap-2`}>
-            <p>{user? user.userName : null}</p>
+            <SmallBodyText>{user? user.userName : null}</SmallBodyText>
             <IconUserCircle
                 size={18}
                 className={`text-[color:var(--color-dark)] cursor-pointer`}

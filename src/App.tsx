@@ -15,6 +15,7 @@ import ContactDetailPage from "./pages/ContactDetailPage.tsx";
 import UserProfile from "./components/UserProfile.tsx";
 import Chat from './components/Chat.tsx';
 import AiChat from "./components/AiChat.tsx";
+import {SmallBodyText} from "./components/Typography.tsx";
 
 
 const Layout = () => {
@@ -32,15 +33,15 @@ const Layout = () => {
 
 const NotFound = ()=>{
     return <div className={`w-1/2 mx-auto text-center py-[50%]`}>
-        <p className={`text-[color:var(--color-dark)]`}>Page not found</p>
-        <Link to={'/messages'} className={`text-[color:var(--color-main)] underline italic`}>Back to home</Link>
+        <SmallBodyText className={`text-[color:var(--color-dark)]`}>Page not found</SmallBodyText>
+        <Link to={'/messages'} className={``}><SmallBodyText className={`!text-[color:var(--color-main)] underline italic`}>Back to home</SmallBodyText></Link>
     </div>
 }
 
 const PageUnderConstruction = ()=>{
     return <div className={`w-1/2 mx-auto text-center py-[50%]`}>
-        <p className={`text-[color:var(--color-dark)]`}>Page under construction</p>
-        <Link to={'/messages'} className={`text-[color:var(--color-main)] underline italic`}>Back to home</Link>
+        <SmallBodyText className={`text-[color:var(--color-dark)]`}>Page under construction</SmallBodyText>
+        <Link to={'/messages'} className={``}><SmallBodyText className={`!text-[color:var(--color-main)] underline italic`}>Back to home</SmallBodyText></Link>
     </div>
 }
 

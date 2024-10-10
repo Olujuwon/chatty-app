@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../context/AuthContext.tsx";
+import {SmallBodyText} from "../components/Typography.tsx";
 
 
 const LoginPage:React.FC<object> = () => {
@@ -21,11 +22,11 @@ const LoginPage:React.FC<object> = () => {
     return(
         <form className={`flex flex-col gap-y-3 place-items-center justify-center py-[65%]`}
               onSubmit={handleLoginUser}>
-            <input placeholder='Username' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
+            <input placeholder='Username' className={`outline-0 w-3/4 mx-auto h-11 pl-2 rounded text-sm`}
                    onChange={(event) => setUsername(event.currentTarget.value)}
                    value={username} aria-label='Username'
             />
-            <input placeholder='Password' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
+            <input placeholder='Password' className={`outline-0 w-3/4 mx-auto h-11 pl-2 rounded text-sm`}
                    onChange={(event) => setPassword(event.currentTarget.value)}
                    value={password} type="password" aria-label='Password'
             />
@@ -33,13 +34,20 @@ const LoginPage:React.FC<object> = () => {
                 type='submit'
                 disabled={isDisabled}
                 className={`h-10 w-3/4 mx-auto text-[color:var(--color-white)] 
-                ${isDisabled ? 'bg-[color:var(--color-disabled)]' : 'bg-[color:var(--color-main)]'}`}>
-                Login
+                ${isDisabled ? 'bg-[color:var(--color-disabled)]' : 'bg-[color:var(--color-main)]'} rounded`}>
+                <SmallBodyText
+                    className={`!text-[color:var(--color-white)] !font-semibold`}>
+                    Login
+                </SmallBodyText>
             </button>
-            <Link className={`mx-auto mt-4 cursor-pointer text-[color:var(--color-dark)]`} to='/auth/register'>Not
-                registered? Register here</Link>
-            <p className='mx-auto mt-4 cursor-pointer text-[color:var(--color-dark)] text-xs font-light'>Powered by
-                React.js</p>
+            <Link className={`mx-auto mt-4 cursor-pointer`} to='/auth/register'>
+                <SmallBodyText>
+                    Not registered? Register here
+                </SmallBodyText>
+            </Link>
+            <SmallBodyText>
+                Powered by React.js
+            </SmallBodyText>
         </form>
     )
 }

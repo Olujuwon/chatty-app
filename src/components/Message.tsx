@@ -3,6 +3,7 @@ import {IMessage} from "../types";
 import {formatDistanceToNow} from "date-fns";
 import {useUpdateMessageMutation} from "../redux/chatty.ts";
 import {IconChecks} from "@tabler/icons-react";
+import {MediumBodyText, XSmallBodyText} from "./Typography.tsx";
 
 
 interface IMessageComponentProps {
@@ -33,11 +34,11 @@ const MessageComponent: React.FC<IMessageComponentProps> = ({message, loggedInUs
     return(
         <div className={`mb-2 max-w-[80%] ${isLeft ? 'self-start' : 'self-end'}`} key={created_time}>
             <div className={`${ isLeft ? 'bg-[color:var(--color-main)]' : 'bg-[color:var(--color-gray)]'} p-2 rounded-t-xl ${ isLeft ? 'rounded-br-xl' : 'rounded-bl-xl'}`}>
-                <p className={`text-base font-normal text-[color:var(--color-white)]`}>{body}</p>
+                <MediumBodyText className={`!text-[color:var(--color-white)]`}>{body}</MediumBodyText>
             </div>
             <div className={`flex gap-x-2`}>
                 <IconChecks size={18} className={`${isRead ? 'text-[color:var(--color-main)]' : 'text-[color:var(--color-text)]'}`}/>
-                <p className={`text-[10px] font-normal text-[color:var(--color-text)]`}>{created_time}</p>
+                <XSmallBodyText className={``}>{created_time}</XSmallBodyText>
             </div>
         </div>
     )

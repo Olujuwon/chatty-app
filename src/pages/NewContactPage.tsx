@@ -7,6 +7,7 @@ import {Hits, InstantSearch, SearchBox, useInstantSearch} from "react-instantsea
 import "instantsearch.css/themes/satellite.css";
 import ContactItem from "../components/ContactItem.tsx";
 import {IUser} from "../types";
+import {MainHeaderText} from "../components/Typography.tsx";
 
 const  EmptyQueryBoundary = ({ children, fallback }: {children: React.ReactNode; fallback: null}) => {
     const { indexUiState } = useInstantSearch();
@@ -34,11 +35,11 @@ const NewContact :React.FC = () => {
     }, []);
 
     return (
-        <div className={`text-[color:var(--color-dark)] w-full mx-auto px-4`}>
-            <h3 className={`flex items-center text-2xl cursor-pointer mt-2.5`}>
+        <div className={`w-full mx-auto px-4`}>
+            <MainHeaderText className={`flex items-center cursor-pointer mt-2.5`}>
                 <IconArrowLeft onClick={() => navigate(-1)} className={`w-5 text-[color:var(--color-dark)]`}/>
-            </h3>
-            <h2 className={`text-2xl font-bold py-4 text-[color:var(--color-text)]`}>Search to add new contacts</h2>
+            </MainHeaderText>
+            <MainHeaderText className={`py-4`}>Search to add new contacts</MainHeaderText>
             <div className={`text-[color:var(--color-dark)] pt-2 text-center`}>
                 <InstantSearch
                     searchClient={searchClient}

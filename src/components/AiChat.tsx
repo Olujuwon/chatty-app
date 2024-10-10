@@ -8,6 +8,7 @@ import {useAuth} from "../context/AuthContext.tsx";
 import MessageComponent from "./Message.tsx";
 import useMessages from "../hooks/useMessages.tsx";
 import {AlwaysScrollToBottom} from "./Chat.tsx";
+import {MainHeaderText, MediumBodyText} from "./Typography.tsx";
 
 
 
@@ -48,11 +49,11 @@ const AiChat: React.FC = ()=>{
 
     return (
         <div className={`w-full mx-auto px-2 max-h-[calc(100vh-74px)]`}>
-            <h3 className={`flex items-center text-2xl cursor-pointer my-2.5`}>
+            <MainHeaderText className={`flex items-center cursor-pointer my-2.5`}>
                 <IconArrowLeft onClick={() => navigate(-1)} className={`w-5 mr-2 text-[color:var(--color-dark)]`}/>
                 {contact ?
-                    <p className={`text-[color:var(--color-dark)] text-base font-light`}>{contact.userName}</p> : ''}
-            </h3>
+                    <MediumBodyText className={`font-light`}>{contact.userName}</MediumBodyText> : ''}
+            </MainHeaderText>
             <div
                 className={`w-full max-h-[calc(100vh-74px-96px-24px)] h-[calc(100vh-75px-96px-24px)] overflow-scroll flex flex-col`}
                 ref={messagesContainerRef}>
@@ -82,7 +83,7 @@ const AiChat: React.FC = ()=>{
                     onClick={handleSendMessage}
                 >
                     <IconSend
-                        stroke={2}
+                        stroke={1}
                         size={40}
                         className={`text-[color:var(--color-main)]`}/>
 

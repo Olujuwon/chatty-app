@@ -4,6 +4,7 @@ import {IconUserCircle} from "@tabler/icons-react";
 import {useGetContactLastMessageQuery} from "../redux/chatty.ts";
 import {IMessage, IUser} from "../types";
 import {useAuth} from "../context/AuthContext.tsx";
+import {SmallBodyText, SmallHeaderText} from "./Typography.tsx";
 
 interface IMessagePreviewComponentProps {
     contact: Partial<IUser>
@@ -18,12 +19,12 @@ const messageContainerStyle = `self-center text-[color:var(--color-text)] text-x
 const MessageComponent: React.FC<{message: string; isAiContact: boolean}> = ({message, isAiContact})=> {
 
     if (isAiContact && !message) {
-        return <p className={`${messageContainerStyle}`}>Ask chattyai for help</p>
+        return <SmallBodyText className={`${messageContainerStyle}`}>Ask chattyai for help</SmallBodyText>
     }
     if (!isAiContact && !message) {
-        return <p className={`${messageContainerStyle}`}>Start chatting</p>
+        return <SmallBodyText className={`${messageContainerStyle}`}>Start chatting</SmallBodyText>
     }
-    return <p className={`${messageContainerStyle}`}>{message}</p>
+    return <SmallBodyText className={`${messageContainerStyle}`}>{message}</SmallBodyText>
 }
 
 const MessagePreview: React.FC<IMessagePreviewComponentProps> = ({contact}) => {
@@ -34,13 +35,13 @@ const MessagePreview: React.FC<IMessagePreviewComponentProps> = ({contact}) => {
         <IconUserCircle stroke={2} size={50} className={`text-[color:var(--color-text)]`}/>
         <div className={`px-4 flex flex-row w-full justify-between`}>
                 <span>
-                    <h2 className={`self-center text-[color:var(--color-text)] text-sm font-semibold`}>{contact.userName}</h2>
+                    <SmallHeaderText className={`self-center font-semibold`}>{contact.userName}</SmallHeaderText>
                     {isSuccess && lastMessage && lastMessage.length > 0 ? <>
-                        <MessageComponent message={lastMessage[0].body.substring(0, 42) + ' ...'} isAiContact={false}/>
+                        <MessageComponent message={lastMessage[0].body.substring(0, 42)} isAiContact={false}/>
                     </> : <MessageComponent message={lastMessage} isAiContact={contact.id === import.meta.env.VITE_CHATTY_AI_ID}/> }
                 </span>
             {isSuccess && lastMessage && lastMessage.length > 0 ? <>
-                <p className={`${messageContainerStyle}`}>{getMessageTime(lastMessage[0])}</p>
+                <SmallBodyText className={`${messageContainerStyle}`}>{getMessageTime(lastMessage[0])}</SmallBodyText>
             </> : <></>}
         </div>
     </div>

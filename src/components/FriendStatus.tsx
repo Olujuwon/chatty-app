@@ -1,5 +1,6 @@
 import React from "react";
 import useContacts from "../hooks/useContacts.tsx";
+import {SmallBodyText} from "./Typography.tsx";
 
 interface IContactFollowStatusComponentProps {
     followStatus: 'Pending' | 'Following' | 'Add' | 'Accept';
@@ -42,11 +43,11 @@ const ContactFollowStatusComponent: React.FC<IContactFollowStatusComponentProps>
     return(
         <button
             className={`${followStatus === 'Pending'?'bg-[color:var(--color-disabled)]':'bg-[color:var(--color-main)]'} 
-            py-2 px-4 text-[color:var(--color-text)]`}
+            py-2 px-4`}
             onClick={handleClickButton}
             disabled={followStatus === 'Pending'}
         >
-            {followStatus}
+           <SmallBodyText className={`text-[color:var(--color-white)]`}>{followStatus}</SmallBodyText>
         </button>
     )
 }

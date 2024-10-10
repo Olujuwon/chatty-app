@@ -5,6 +5,7 @@ import {IconArrowLeft, IconUserCircle, IconSend} from "@tabler/icons-react";
 import {useCookies} from "react-cookie";
 import useContacts from "../hooks/useContacts.tsx";
 import ContactFollowStatusComponent from "../components/FriendStatus.tsx";
+import {MainHeaderText, MediumBodyText} from "../components/Typography.tsx";
 
 
 
@@ -30,16 +31,16 @@ export const ContactDetailPage: React.FC = () => {
 
     return (
         <div className={`text-[color:var(--color-dark)] p-4`}>
-            <h3 className={`flex items-center text-2xl cursor-pointer mt-2.5`}>
+            <MainHeaderText className={`flex items-center text-2xl cursor-pointer mt-2.5`}>
                 <IconArrowLeft onClick={()=>navigate(-1)} className={`w-5 mr-2 text-[color:var(--color-dark)]`}/>
-            </h3>
+            </MainHeaderText>
             <div className={`text-[color:var(--color-dark)] pt-8`}>
                 <span>
                     <IconUserCircle stroke={2} size={100} className={`mx-auto text-[color:var(--color-main)]`}/>
                 </span>
                 <div className={`mt-10 text-center`}>
-                    <h2 className={`text-2xl font-semibold text-[color:var(--color-text)] mb-2`}>{`${contact?.userName}`}</h2>
-                    <p className={`text-base font-normal text-[color:var(--color-text)] mb-4 mx-auto]`}>{`${contact?.bio}`}</p>
+                    <MainHeaderText className={`font-semibold mb-2`}>{`${contact?.userName}`}</MainHeaderText>
+                    <MediumBodyText className={`mb-4 mx-auto]`}>{`${contact?.bio}`}</MediumBodyText>
                     <div className={`flex justify-center gap-x-6`}>
                         <ContactFollowStatusComponent
                             followStatus={ContactFollowStatus}
