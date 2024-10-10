@@ -40,7 +40,9 @@ const Header: React.FC<HeaderProps> = ({checked, handleSwitch})=>{
                         <NavLink
                             to={route.value}
                             key={index}
-                            className={({isActive}) => `${isActive ? 'text-[color:var(--color-main)] border-b-2 border-b-[color:var(--color-main)] pb-1' : 'text-[color:var(--color-text)]'}`}
+                            className={({isActive}) => `${isActive ? 
+                                'text-[color:var(--color-main)] border-b-2 border-b-[color:var(--color-main)] pb-1' : 
+                                'text-[color:var(--color-text)]'}`}
                         >
                             {<route.icon
                                 size={18}/>}</NavLink>

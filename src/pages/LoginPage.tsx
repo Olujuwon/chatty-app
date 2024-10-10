@@ -23,11 +23,11 @@ const LoginPage:React.FC<object> = () => {
               onSubmit={handleLoginUser}>
             <input placeholder='Username' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
                    onChange={(event) => setUsername(event.currentTarget.value)}
-                   value={username}
+                   value={username} aria-label='Username'
             />
             <input placeholder='Password' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
                    onChange={(event) => setPassword(event.currentTarget.value)}
-                   value={password} type="password"
+                   value={password} type="password" aria-label='Password'
             />
             <button
                 type='submit'

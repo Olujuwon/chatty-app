@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 
 const useCurrentTheme = ()=>{
     const [currentTheme, setCurrentTheme] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
 
-    const mqListener = ( (event) => {
+    const mqListener = ( (event: MediaQueryListEvent) => {
         setCurrentTheme(event.matches?'dark':'light');
     });
 

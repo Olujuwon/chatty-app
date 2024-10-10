@@ -1,35 +1,7 @@
-import React from "react";
-import {IconUserCircle} from "@tabler/icons-react";
-import {useGetContactLastMessageQuery} from "../redux/chatty.ts";
-import {IMessage, IUser} from "../types";
 import {Link} from "react-router-dom";
 import useContacts from "../hooks/useContacts.tsx";
+import MessagePreview from "../components/MessagePreview.tsx";
 
-
-const getMessageTime = (lastMessage: IMessage)=>{
-    return new Date(lastMessage.updatedAt as Date).toLocaleDateString()
-}
-
-const MessagePreview: React.FC<{contact: Partial<IUser>}> = ({contact})=>{
-    const {loggedInUser} = useContacts();
-    const {data: lastMessage, isSuccess} = useGetContactLastMessageQuery({userId : loggedInUser, contactId: contact.id as string});
-    return(
-        <div className={`w-full p-4 flex flex-row justify-start cursor-pointer`} key={contact.id}>
-            <IconUserCircle stroke={2} size={50} className={`text-[color:var(--color-text)]`}/>
-            <div className={`px-4 flex flex-row w-full justify-between`}>
-                <span>
-                    <h2 className={`self-center text-[color:var(--color-text)] text-sm font-semibold`}>{contact.userName}</h2>
-                    {isSuccess && lastMessage && lastMessage.length > 0 ? <>
-                        <p className={`self-center text-[color:var(--color-text)] text-xs font-light`}>{lastMessage[0].body}</p>
-                    </> : <><p className={`self-center text-[color:var(--color-text)] text-xs font-light`}>Start chatting</p></>}
-                </span>
-                {isSuccess && lastMessage && lastMessage.length > 0 ? <>
-                    <p className={`self-center text-[color:var(--color-text)] text-xs font-light`}>{getMessageTime(lastMessage[0])}</p>
-                </> : <></>}
-            </div>
-        </div>
-    )
-}
 
 
 const MessagesPage = () => {
@@ -52,9 +24,13 @@ const MessagesPage = () => {
                 contacts.map((contact, idx)=>{
                     const isContact = userIsContact(contact.contact);
                     const userContact = isContact ? contact.user : contact.contact;
-                    return (<Link to={`/messages/${userContact.id}`} state={{contact: userContact}} key={userContact.id}>
-                        <MessagePreview contact={userContact} key={idx}/>
-                    </Link>)
+                    const userContactIsAi = userContact.id === import.meta.env.VITE_CHATTY_AI_ID;
+                    if (!contact.accepted)return null
+                    else {
+                        return (<Link to={`/messages/${userContactIsAi ? 'aichat': userContact.id}`} state={{contact: userContact}} key={userContact.id}>
+                            <MessagePreview contact={userContact} key={idx}/>
+                        </Link>)
+                    }
                 })
             }
         </div>

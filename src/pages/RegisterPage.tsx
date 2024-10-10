@@ -17,11 +17,11 @@ const RegisterPage:React.FC<object> = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
+    const [bio, setBio] = useState<string>('');
 
     const handleRegisterUser = async (event:React.SyntheticEvent<HTMLFormElement>)=>{
         event.preventDefault();
-        const user = await register({email:email, password:password, userName:username}) as Partial<IUser>;
-        console.log('Register user', user)
+        const user = await register({email:email, password:password, userName:username, bio: bio}) as Partial<IUser>;
         if (user.userName){
             navigate("/messages");
         }else {
@@ -47,14 +47,19 @@ const RegisterPage:React.FC<object> = () => {
                   onSubmit={handleRegisterUser}>
                 <input placeholder='Username' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
                        onChange={(event) => setUsername(event.currentTarget.value)}
-                       value={username}/>
+                       value={username} aria-label='Username'/>
                 <input placeholder='Email' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
                        onChange={handleEmailFieldChange}
-                       value={email}/>
+                       value={email} aria-label='Email'/>
                 {error && <p className={`w-3/4 mx-auto pl-2 text-[color:var(--color-dark)]`}>{error}</p>}
+
+                <input placeholder='Short bio' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
+                       onChange={(event) => setBio(event.currentTarget.value)}
+                       value={bio} aria-label='Bio'/>
+
                 <input placeholder='Password' className={`outline-0 w-3/4 mx-auto h-11 pl-2`}
                        onChange={(event) => setPassword(event.currentTarget.value)}
-                       value={password} type="password"/>
+                       value={password} type="password" aria-label='Password'/>
                 <button
                     className={`h-10 w-3/4 mx-auto text-[color:var(--color-white)] 
                     ${isDisabled ? 'bg-[color:var(--color-disabled)]' : 'bg-[color:var(--color-main)]'}`}

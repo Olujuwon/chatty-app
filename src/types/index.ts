@@ -19,6 +19,15 @@ export interface IContact {
     updatedAt: Date;
 }
 
+export interface IContactsQueryData {
+    createdAt: Date;
+    updatedAt: Date;
+    accepted: boolean;
+    id: string;
+    user: Partial<IUser>;
+    contact: Partial<IUser>;
+}
+
 export interface IMessage {
     id?: string;
     from: string;

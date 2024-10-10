@@ -43,6 +43,14 @@ export const chattyApi = createApi({
                 }),
                 invalidatesTags: ['auth'],
             }),
+            deleteUser: builder.mutation({
+                query: (userId : string) => ({
+                    url: `users/${userId}`,
+                    method: 'DELETE',
+                }),
+                transformResponse: (response: { data: any }) => response.data,
+                invalidatesTags: ['auth'],
+            }),
             getUserContacts: builder.query({
                 query: (userId : string) => ({
                     url: `contacts/list/${userId}`,
@@ -72,6 +80,13 @@ export const chattyApi = createApi({
                     url: `contacts/${contactId}`,
                     method: 'PUT',
                     body: {...contactUpdate}
+                }),
+                invalidatesTags: ['contact'],
+            }),
+            deleteContact: builder.mutation({
+                query: ( contactId) => ({
+                    url: `contacts/${contactId}`,
+                    method: 'DELETE',
                 }),
                 invalidatesTags: ['contact'],
             }),
@@ -107,6 +122,8 @@ export const {
     useLoginInUserMutation,
     useRegisterUserMutation,
     useLogoutUserMutation,
+    useDeleteUserMutation,
+    useDeleteContactMutation,
     useGetUserContactsQuery,
     useGetUserContactQuery,
     useGetContactLastMessageQuery,
