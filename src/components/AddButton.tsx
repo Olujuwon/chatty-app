@@ -11,6 +11,7 @@ interface AddButtonProps {
 const AddButton: React.FC<AddButtonProps> = ({to, Icon, size}) => {
     return (
         <Link to={to}
+              data-testid='add-new-contact'
               className={`absolute bottom-6 right-4 border-0 w-[60px] h-[60px] rounded-full flex items-center 
               justify-center cursor-pointer bg-[color:var(--color-main)]`}>
             {Icon ? <Icon size={size ? size : 48} className={`text-[color:var(--color-white)]`}/> : <IconPlus size={48} className={`text-[color:var(--color-white)]`}/>}

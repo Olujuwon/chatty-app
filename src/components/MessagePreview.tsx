@@ -31,7 +31,7 @@ const MessagePreview: React.FC<IMessagePreviewComponentProps> = ({contact}) => {
     const {user: loggedInUser} = useAuth();
         const {data: lastMessage, isSuccess} = useGetContactLastMessageQuery({userId : loggedInUser?.id as string, contactId: contact.id as string});
         return(
-        <div className={`w-full p-4 flex flex-row justify-start cursor-pointer`} key={contact.id}>
+        <div className={`w-full p-4 flex flex-row justify-start cursor-pointer`} key={contact.id} data-testid={`message-preview-${contact.userName}`}>
         <IconUserCircle stroke={2} size={50} className={`text-[color:var(--color-text)]`}/>
         <div className={`px-4 flex flex-row w-full justify-between`}>
                 <span>

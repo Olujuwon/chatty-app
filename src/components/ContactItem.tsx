@@ -13,7 +13,7 @@ export const ContactItem: React.FC<IContactItemProps> = ({contact}) => {
     const {followStatus, findContact} = useContacts();
     const contactData = findContact(contact.id as string);
     return (
-        <div className={`bg-[color:var(--color-lighter)] rounded p-4 w-full mb-2`}>
+        <div className={`bg-[color:var(--color-lighter)] rounded p-4 w-full mb-2`} data-testid={`contactItem-${contact.userName}`}>
             <Link
                 to={`/contacts/${contactData?contactData.id:contact.id}`}
                 state={{contactObject: contactData, contact: contact}}

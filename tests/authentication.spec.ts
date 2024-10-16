@@ -1,12 +1,14 @@
 import { test, expect } from "@playwright/test";
 import 'dotenv/config'
 import * as fs from "node:fs";
-import {authFile} from "./auth.setup";
+
+
+export const authFile = "./playwright/.auth/tester01.json";
 
 // Reset storage state for this file to avoid being authenticated
 test.use({ storageState: { cookies: [], origins: [] } });
 
-test.describe.serial("Test landing page and Authentication processes", () => {
+test.describe.serial("Test Authentication processes", () => {
 
   test("user sign up", async ({ page }) => {
     await page.goto(process.env.VITE_PLAYWRIGHT_HOST + "auth/register");
@@ -22,7 +24,7 @@ test.describe.serial("Test landing page and Authentication processes", () => {
 
   test("delete created test user", async ({ page, request }) => {
     //Get session storage , get userId and token from there
-    const sessionStorage = JSON.parse(fs.readFileSync('playwright/.auth/user.json', 'utf-8'));
+    const sessionStorage = JSON.parse(fs.readFileSync('playwright/.auth/tester01.json', 'utf-8'));
     const id=sessionStorage['cookies'][1].value;
     const token=sessionStorage['cookies'][2].value;
     const deleteUserResponse = await request.delete(process.env.VITE_APP_BACKEND_HOST + "users/" + id, {
