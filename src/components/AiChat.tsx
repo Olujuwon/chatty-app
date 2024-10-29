@@ -9,6 +9,7 @@ import MessageComponent from "./Message.tsx";
 import useMessages from "../hooks/useMessages.tsx";
 import {AlwaysScrollToBottom} from "./Chat.tsx";
 import {MainHeaderText, MediumBodyText} from "./Typography.tsx";
+import LoadingComponent from "./Loading.tsx";
 
 
 
@@ -21,7 +22,7 @@ const AiChat: React.FC = ()=>{
     const {userId} = useAuth();
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const {messages, setMessages, receiveNewMessage} = useMessages({userId: userId as string, contactId: contact?.id as string});
+    const {messages, setMessages, receiveNewMessage, isError, isLoading} = useMessages({userId: userId as string, contactId: contact?.id as string});
 
     const handleSendMessage = () => {
         if (messageBody.length <= 0){
@@ -46,6 +47,9 @@ const AiChat: React.FC = ()=>{
         };
     }, [wsEvents.SERVER.SEND_MESSAGE_TO_AI])
 
+    if (isLoading || isError){
+        return <LoadingComponent/>
+    }
 
     return (
         <div className={`w-full mx-auto px-2 max-h-[calc(100vh-74px)]`}>

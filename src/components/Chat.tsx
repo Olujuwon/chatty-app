@@ -7,6 +7,7 @@ import {useAuth} from "../context/AuthContext.tsx";
 import MessageComponent from "./Message.tsx";
 import useMessages from "../hooks/useMessages.tsx";
 import {MainHeaderText, MediumBodyText} from "./Typography.tsx";
+import LoadingComponent from "./Loading.tsx";
 
 export const AlwaysScrollToBottom = () => {
     const elementRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ const Chat: React.FC = ()=>{
     const {userId} = useAuth();
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const {messages, setMessages, receiveNewMessage} = useMessages({userId: userId as string, contactId: contact?.id as string});
+    const {messages, setMessages, receiveNewMessage, isError, isLoading} = useMessages({userId: userId as string, contactId: contact?.id as string});
 
     const handleSendMessage = () => {
         if (messageBody.length <= 0){
@@ -48,6 +49,10 @@ const Chat: React.FC = ()=>{
             socket.off(wsEvents.SERVER.SEND_MESSAGE, receiveNewMessage);
         };
     }, [wsEvents.SERVER.SEND_MESSAGE])
+
+    if (isLoading || isError){
+        return <LoadingComponent/>
+    }
 
 
     return (
