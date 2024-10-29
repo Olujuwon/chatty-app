@@ -31,7 +31,10 @@ jobs:
       run: yarn playwright install --with-deps
 
     - name: Create user and admin json
-      run: mkdir -p playwright/.auth && touch playwright/.auth/user.json && touch playwright/.auth/tester01.json
+      run: |
+        mkdir -p playwright/.auth
+        echo '{}' > playwright/.auth/user.json
+        echo '{}' > playwright/.auth/tester01.json
 
     - name: Run Playwright tests
       run: yarn playwright test
